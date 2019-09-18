@@ -1,38 +1,37 @@
-��ַ https://github.com/gzh51906/mia.git https://github.com/gzh51906/mia2.git  
 
-Զ�ֿ̲����뱾�زֿ���ͨ��origin�����н����ģ���Զ�̵����ص��ǵ�origin������ֻ�б��صķ�֧����origin������Զ�̵Ľ�����master�Զ�����origin�����������ķ�֧��Ҫ�Լ������ˣ�
+远程仓库是与本地仓库是通过origin来进行交互的（从远程到本地的是到origin中所以只有本地的分支关联origin才能与远程的交互，master自动关联origin，但是其他的分支就要自己关联了）
 
-git init //�������زֿ�
+git init //建立本地仓库
  
-git remote add origin  git��ַ  ����git clone git��ַ  //����Զ�ֿ̲⣨��Զ�ֿ̲�ӵ�origin�У�
+git remote add origin  git地址  或者git clone git地址  //关联远程仓库（将远程仓库加到origin中）
 
-git branch dev origin/dev  //����dev��֧������origin�е�dev
+git branch dev origin/dev  //建立dev分支并关联origin中的dev
 
-git pull origin dev //��origin���õ�dev
-
-
-git branch �Լ�������  //����һ�����ط�֧
+git pull origin dev //从origin中拿到dev
 
 
-git merge dev	       //��ԭ���ǿհ׵ģ����Լ��ķ�֧�кͲ�dev��֧ ��dev��֧�е����ݸ��ƹ������õ�ԭʼ��dev�ļ�
+git branch 自己的名字  //建立一个本地分支
 
 
-git merge �Լ�������  //��dev�н��޸���ķ�֧���Լ������֣���dev�ϲ���һ��
-
-git push origin dev   //�� origin dev ���͵�Զ�ֿ� 
+git merge dev	       //（原本是空白的）在自己的分支中和并dev分支 将dev分支中的内容复制过来，得到原始的dev文件
 
 
+git merge 自己的名字  //在dev中将修改完的分支（自己的名字）与dev合并到一起
 
-��չ��git remote -v             		     ��ʾ�˿���ץȡ�����͵�origin�ĵ�ַ�����û������Ȩ�ޣ��Ϳ�����push�ĵ�ַ��
-      git add .		        	             �����еĹ������ļ����ӵ��ݴ���
-      git commit -m '�ύ˵��'  		     ���ݴ������ļ����ӵ��ֿ��� 	       
-      git checkout ��֧��       		     �л�����һ����֧
-      git branch               			     �鿴���з�֧
-      git ls-files             			     �鿴��ǰĿ¼�µ��ļ�
-      git log                  			     �鿴��ǰ��֧�İ汾��Ϣ���ύ��ϸ��Ϣ
-      git reflog                	             �鿴���еİ汾��Ϣ���ύ��Ϣ
-      git reset --hard �汾��                        �汾����,�ص�ָ�����汾
-      git branch --set-upstream-to=origin/��֧��     ���˷�֧����ΪĬ�Ϸ�֧
+git push origin dev   //将 origin dev 推送到远仓库 
+
+
+
+扩展：git remote -v             		     显示了可以抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址。
+      git add .		        	             将所有的工作区文件添加到暂存区
+      git commit -m '提交说明'  		     将暂存区的文件添加到仓库区 	       
+      git checkout 分支名       		     切换到哪一个分支
+      git branch               			     查看所有分支
+      git ls-files             			     查看当前目录下的文件
+      git log                  			     查看当前分支的版本信息，提交详细信息
+      git reflog                	             查看所有的版本信息，提交信息
+      git reset --hard 版本号                        版本回退,回到指定个版本
+      git branch --set-upstream-to=origin/分支名     将此分支设置为默认分支
       	
-ע�⣺���еĹ�����Ҫ���Լ��ı��ط�֧����ɣ���Ҫ�ѷ�֧�л����Լ��ı��ط�֧��Ȼ���ٽ��й������粻��˻���һ����������֡�
+注意：所有的工作都要在自己的本地分支上完成，即要把分支切换到自己的本地分支上然后再进行工作，如不如此会有一定的问题出现。
       
