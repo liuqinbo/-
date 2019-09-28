@@ -1,0 +1,124 @@
+1)react的页面引入，跟vue的一样，导出 export default Home;  然后再其想应用的页面导入import Home from './page/Home';
+注意把页面要放在app.js的同一目录下
+
+
+
+3)利用路由跳转。安装依赖react-router，react-router-dom
+1.引入式跳转。2.编程式跳转
+		
+		跳转时的传参
+                this.props.history.push({ pathname: path, state: {key:value}})  在this.props.location.state里面
+		刷新就没了，但是可以传对象与字符串
+		
+		this.props.history.push({ pathname: path, search: '字符串' })   search的值会跟在url后面，刷新不会消失，只能传字符串类型。
+		在this.props.location.search
+
+
+	3.1引入式跳转的方式与传参
+		import React, { Component } from 'react';
+		import { BrowserRouter, Route, Link } from 'react-router-dom'
+		import Home from './page/Home';
+		class App extends Component {
+  		render() {
+   		 return (
+   		   <BrowserRouter>
+       		  	 <Link to="/home" >home</Link><br />
+
+      			  {/*以下为路由配置*/}
+
+      			  <Route path='/home' component={Home} />
+      		  </BrowserRouter>
+
+  		  );
+  		}
+	}
+
+
+	3.2编程式跳转的方式与传参
+		        <div onClick={this.goto} >Home</ div>
+			  goto = () => {
+  				  this.props.history.push("/home")
+ 			 }
+	注意传参的方式不能直接写要用 this.goto.bind(this,参数);
+	
+	3.3
+	
+	动态路由         <Route path='/goods/:id' component={Goods} />，组件用类函数。传递的参数在this.props.match.params里，刷新不消失
+	嵌套路由	 <Route>写在哪里就是哪个的子路由，自身如果再有子路由就是嵌套路由了
+
+4)react-redux的用法
+
+使用React-Redux时，首先要创建一个Provider组件，作为最顶层的组件将所有React组件包裹起来，从而使所有的React组件都变为Provider的后代组件，
+再将已经创建好的Store作为属性传递给Provider组件。通过Provider组件建立起Store与React组件之间的联系。
+
+Provider内的任何一个组件（比如这里的App），并不能直接获得State中的数据，而且也只能是有选择地访问State中的某些数据，这需要经过一个称为“connect”的过程。
+Connect的主要作用是将State中的数据转换为组件可用的数据，以及生成Action的派发函数。在运行过程中React-Redux会调用connect对组件进行包裹，并传递State数据。
+
+5)HashRouter，BrowserRouter
+hash路由是有hash值也就是#/后面的东西来跳转的，不是真正的url，
+browser是由真正的url路径来进行跳转的，所以上线的时候会出现问题，如果用的hash路由就不会有问题
+
+6)组件刷新（重新render）的条件，出来第一的加载外就是要  1  props改变；2  state改变；3  forceUpdate强制刷新
+
+7) antd 按需加载  
+1.安装依赖 npm i antd -D  还有 npm i   babel-plugin-import -D
+2.在根目录下添加一个 .babelrc 代码如下
+{
+    "plugins": [
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": "css"
+            }
+        ]
+    ]
+}
+3.在node_modules里的react-scripts 文件夹的config的webpack.config.js 里的babelrc将flase改为true
+
+8) state里的值不能直接改要用 this.setState({})来改
+
+9) redux 与react-redux的联合使用
+  1.用redux创建一个store。
+	import { createStore } from 'redux'
+	let defaultState = { goodlist: [] }
+
+	function reducer(state = defaultState, action) {
+ 	   switch (action.type) {
+       	 	case 'ADD_TO_CART':
+            	return {
+               		 ...state,
+              	  	goodlist: [...state.goodlist, action.payload]
+          	  }
+        	default:
+            	return state
+   	 	}
+	}
+
+	const store = createStore(reducer)
+
+	export default store;
+  2.用react-redux将 store与Provide 联合起来
+	import { Provider } from 'react-redux';
+	import store from './redux'
+	<Provider store={store}>
+        <HashRouter>
+            <App />
+        </HashRouter>
+       </Provider>
+  3.使用，使用时引入react-redux的connect  有两常用参数 mapStateToProps，mapDispatchToProps。
+
+10) redux模块化
+	import {combineReducers} from 'redux';
+	import cartReducer from './cart';
+	import commonReducer from './common';
+
+	export default combineReducers({
+ 	   cart:cartReducer,
+    	   common:commonReducer
+	});
+  	模块cart，common跟之前一样写。
+	用法，原本state.属性变成 state.cart/common(模块名).属性
+11) action 统一写起来,由函数来生成action,然后调用函数就行了
+
+12)   componentWillReceiveProps  props改变时触发这个生命周期函数
