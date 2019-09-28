@@ -1,3 +1,4 @@
+
 远程仓库是与本地仓库是通过origin来进行交互的（从远程到本地的是到origin中所以只有本地的分支关联origin才能与远程的交互，master自动关联origin，但是其他的分支就要自己关联了）
 
 git init //建立本地仓库
@@ -31,8 +32,6 @@ git push origin dev   //将 origin dev 推送到远仓库
       git reflog                	             查看所有的版本信息，提交信息
       git reset --hard 版本号                        版本回退,回到指定个版本
       git branch --set-upstream-to=origin/分支名     将此分支设置为默认分支
-      
       	
 注意：所有的工作都要在自己的本地分支上完成，即要把分支切换到自己的本地分支上然后再进行工作，如不如此会有一定的问题出现。
-      解决冲突后要再提交一次
       
