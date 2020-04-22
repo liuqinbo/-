@@ -1,0 +1,77 @@
+# study-file
+学习文档
+1.修改vue的指定端口号，在跟目录下创建一个vue.config.js
+代码如下
+    module.exports = {
+      devServer: {
+        port: 3000, // 端口
+      },
+    }
+2.遇到的错误
+sockjs其实其作用就是保证我们在改完代码重新编译之后，能够通知浏览器重新加载变更结果
+
+vue-cli3 一直运行 /sockjs-node/info?t= 
+解决方案 
+如果你的项目没有用到 sockjs，vuecli3 运行 npm run serve 之后 network 里面一直调研一个接口：http://localhost:8080/sockjs-node/info?t=1462183700002
+
+1. 找到/node_modules/sockjs-client/dist/sockjs.js 
+
+2.找到代码的 1755行  
+
+  try {
+      //  self.xhr.send(payload); 把这里注掉
+      } catch (e) {
+        self.emit('finish', 0, '');
+        self._cleanup(false);
+      }
+
+3.上线时出现connection_refused
+是因为host地址(ip地址)不让访问，所以出现错误，将dev(vue.config.js文件中)中的host改为可以访问的IP地址就行，如服务器端的ip，或者自己的IP地址
+devServer: {
+        port: 7000, // 端口
+        sockHost: '10.0.0.241', //改为可以访问的地址
+        disableHostCheck: true,
+ },
+
+
+总结：上线时要将2.3搞好再提交
+
+4.用scss或less就可以把单独的样式文件变成一个局部的样式
+
+5.keep-alive的include和exclude的是写的是组件名，但是不是写在路由那里，是要写在单文件组件里面
+
+6.process.env.NODE_ENV 判断当前的环境
+  //开发与生产环境用不同的接口
+  let ssoUrl=null
+  let picUrl=null
+  if(process.env.NODE_ENV=='development'){  //开发环境
+    开发环境的接口地址
+  }else{
+    生产环境的接口地址
+  }
+
+7.navigator.userAgent 用来判断是手机端还是pc端
+ //判断是否是手机打开
+ if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  window.console.log('手机打开')
+ }else{
+  window.console.log('其他打开')
+ }
+8.二级目录
+(1)路由那里加给base:'二级目录名称'
+mode: 'hash', // 默认hash
+base:'/mob/',	
+(2)vue.config.js里加  publicPath:'二级目录名称'
+module.exports = {
+    publicPath:'/mob/',
+    devServer: {
+        port: 80, // 端口
+    }
+}
+9.style 不加scope就能修改ui框架的默认样式
+
+10. 打包时隐藏源码  在vue.config.js 中设置 productionSourceMap ：false
+
+11.css样式鼠标不可点 cursor:not-allowed; pointer-events:none(禁止触发事件，鼠标样式禁止）
+
+
