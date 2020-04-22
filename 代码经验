@@ -29,7 +29,7 @@ vue-cli3 一直运行 /sockjs-node/info?t=
 是因为host地址(ip地址)不让访问，所以出现错误，将dev(vue.config.js文件中)中的host改为可以访问的IP地址就行，如服务器端的ip，或者自己的IP地址
 devServer: {
         port: 7000, // 端口
-        sockHost: '10.0.0.241', //改为可以访问的地址
+        sockHost: '10.0.0.0', //改为可以访问的地址
         disableHostCheck: true,
  },
 
