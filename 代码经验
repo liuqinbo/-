@@ -74,4 +74,29 @@ module.exports = {
 
 11.css样式鼠标不可点 cursor:not-allowed; pointer-events:none(禁止触发事件，鼠标样式禁止）
 
+12.vue axios取消请求
 
+ async send(){
+      try{
+      this.source=axios.CancelToken.source()
+      axios({
+          method:'post',
+          url:'https://sso.api.gzzwyx.cn/index/login',
+          data:{
+            userName: "sdfsdfs",
+            passWord: "dfsdfd"
+          },
+          cancelToken:this.source.token
+        }).catch((thrown)=>{
+          if(axios.isCancel(thrown)){
+            window.console.log(thrown.message,this.source.token)
+          }
+        })
+      }catch(error){
+        window.console.log(error,this.source.token)
+      }
+      
+    },
+    cancel(){
+      this.source.cancel('取消请求')
+    }
