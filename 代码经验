@@ -100,3 +100,7 @@ module.exports = {
     cancel(){
       this.source.cancel('取消请求')
     }
+    
+13.打包会要有一个配置文件写在public里(因为里面的代码不会build)写一个js代码全局对象，然后在index.html用<srcipt>标签引入js配置文件，然后在项目里就可以用window直接充值配置文件里的东西了，build后也不响应
+
+14.如果是用ip地址访问的网站的话用meta设置默认使用内核是无效的，依然会用ie内核
