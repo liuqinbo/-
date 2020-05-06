@@ -108,3 +108,5 @@ module.exports = {
 15.antd design of vue 自定义主题
 vue.config.js 配置
 .babelrc 配置
+
+16.autocomplete="off" 在谷歌保存密码后没有用 要用 autocomplete="new-password" 才有效
