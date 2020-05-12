@@ -110,3 +110,29 @@ vue.config.js 配置
 .babelrc 配置
 
 16.autocomplete="off" 在谷歌保存密码后没有用 要用 autocomplete="new-password" 才有效
+
+17. 复制
+    <label>原生JS的复制实现</label>
+    <input id="text" placeholder="复制内容"/>
+    <button id="copy">复制</button>
+    <script>
+        let text=document.getElementById('text')
+        let copy=document.getElementById('copy')
+        copy.onclick=()=>{
+            if(!text.value){
+                alert('复制内容不能为空')
+                return
+            }
+            let oInput = document.createElement('input'); //创建一个标签
+            oInput.value = text.value;//把值赋给他
+            document.body.appendChild(oInput);//插入
+            oInput.select(); // 选择对象;
+            document.execCommand("Copy"); // 执行浏览器复制命令
+            if(oInput.value){
+                alert('复制成功');
+            }else{
+                alert('复制失败')  
+            }
+            oInput.remove()
+        }
+    </script>
