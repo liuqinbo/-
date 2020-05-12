@@ -5,24 +5,10 @@ article
 aside
 footer
 
+ä½¿videoçš„controlè‡ªåŠ¨é€‚åº”videoçš„å®½é«˜   style=â€œobject-fit: fill;â€
 
- Ê¹videoµÄcontrol×Ô¶¯ÊÊÓ¦videoµÄ¿í¸ß
- style=¡°object-fit: fill;¡±
+è®°å¾—saccçš„åç¼€æ˜¯ç”¨æ–°ç‰ˆçš„ .scss,è¿˜è¦ä¸‹è½½æ’ä»¶easy sass å’Œè‡ªåŠ¨æ ¼å¼åŒ–çš„beautiful sass
 
+cssrem ä¸€ä¸ªcsså€¼è½¬remçš„æç¤ºæ’ä»¶
 
-
-¼ÇµÃsaccµÄºó×ºÊÇÓÃĞÂ°æµÄ .scss
-
-»¹ÒªÏÂÔØ²å¼şeasy sass ºÍ×Ô¶¯¸ñÊ½»¯µÄbeautiful sass
-
-
-
-cssrem Ò»¸öcssÖµ×ªremµÄÌáÊ¾²å¼ş
-
-ÆÙ²¼Á÷²¼¾Ö
-ÓÃbreak-inside£ºavoid£»·ÀÖ¹²åÈë·ÖÒ³·ûÈÃÄÚÈİ·Ö¿ª¡£
-
-
-
-
-C:\Users\Administrator\Documents\WeChat Files\lqb1234321\FileStorage\File\2019-06
+ç€‘å¸ƒæµå¸ƒå±€  ç”¨break-insideï¼šavoidï¼›é˜²æ­¢æ’å…¥åˆ†é¡µç¬¦è®©å†…å®¹åˆ†å¼€ã€‚
