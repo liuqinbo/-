@@ -133,6 +133,6 @@ vue.config.js 配置
             }else{
                 alert('复制失败')  
             }
-            oInput.remove()
+            oInput.remove() //删除标签
         }
     </script>
