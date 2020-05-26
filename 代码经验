@@ -138,3 +138,10 @@ vue.config.js 配置
     </script>
 
 18.在vue中使用setInterval时记得在钩子函数中销毁，不然会让内存溢出。销毁是最好用异步的方式套个setTimeout不然可能会无法销毁，特别是异步请求里使用一定要用
+
+19.element自定义主题颜色
+创建scss文件 如 liu.scss
+然后在main里面引入scss文件就可以了，当然如果没有引入scss模块要记得引入
+
+
+
