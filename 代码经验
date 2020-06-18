@@ -52,7 +52,7 @@ devServer: {
 
 7.navigator.userAgent 用来判断是手机端还是pc端
  //判断是否是手机打开
- if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+ if(/Android|webOS|iPhone|iPad|BlackBerry/i.test(navigator.userAgent)) {
   window.console.log('手机打开')
  }else{
   window.console.log('其他打开')
