@@ -143,5 +143,5 @@ vue.config.js 配置
 创建scss文件 如 liu.scss
 然后在main里面引入scss文件就可以了，当然如果没有引入scss模块要记得引入
 
-
+20. -webkit-tap-highlight-color:transparent;   去手机点击时的阴影
 
