@@ -145,3 +145,4 @@ vue.config.js 配置
 
 20. -webkit-tap-highlight-color:transparent;   去手机点击时的阴影
 
+21.\u0022 正则中表示双引号
