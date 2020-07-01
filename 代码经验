@@ -146,3 +146,13 @@ vue.config.js 配置
 20. -webkit-tap-highlight-color:transparent;   去手机点击时的阴影
 
 21.\u0022 正则中表示双引号
+
+22.vue 的插槽用法
+//普通具名插槽
+<slot name="插槽名"></slot>
+<template v-slot:插槽名></template>
+//具名作用域插槽
+<slot name="插槽名" v-bind:变量名="变量名"> </slot>
+<template v-slot:插槽名="变量名">
+   {{变量名}}
+</template>
