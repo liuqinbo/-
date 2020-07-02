@@ -75,32 +75,34 @@ module.exports = {
 11.css样式鼠标不可点 cursor:not-allowed; pointer-events:none(禁止触发事件，鼠标样式禁止）
 
 12.vue axios取消请求
-
- async send(){
-      try{
-      this.source=axios.CancelToken.source()
-      axios({
-          method:'post',
-          url:'https://sso.api.gzzwyx.cn/index/login',
-          data:{
-            userName: "sdfsdfs",
-            passWord: "dfsdfd"
-          },
-          cancelToken:this.source.token
-        }).catch((thrown)=>{
-          if(axios.isCancel(thrown)){
-            window.console.log(thrown.message,this.source.token)
-          }
-        })
-      }catch(error){
-        window.console.log(error,this.source.token)
+//全局取消请求数组
+Vue.prototype.$arr=[]
+//请求拦截
+platform.interceptors.request.use(
+  config => {
+    config.cancelToken=new axios.CancelToken(cancel=>{
+      Vue.prototype.$arr.push({cancel,'url':config.url})
+    })
+  }
+)
+//响应拦截
+platform.interceptors.response.use(
+  response => {
+    Vue.prototype.$arr.forEach((element,index)=> {
+      if(element.url==response.config.url){
+        Vue.prototype.$arr.splice(index,1); 
       }
-      
-    },
-    cancel(){
-      this.source.cancel('取消请求')
-    }
-    
+    });
+  }
+)
+//路由拦截
+router.beforeEach(async (to, from, next) => {
+    Vue.prototype.$arr.forEach((ele)=>{
+        ele.cancel()
+    })
+    Vue.prototype.$arr=[]
+})
+
 13.打包会要有一个配置文件写在public里(因为里面的代码不会build)写一个js代码全局对象，然后在index.html用<srcipt>标签引入js配置文件，然后在项目里就可以用window直接充值配置文件里的东西了，
 build后也不影响
 
