@@ -164,13 +164,22 @@ vue.config.js 配置
 1.创建一个文件
 2.npm init 初始化然后填写相关信息(如不想写也可一路回车，不过建议作者那一项还是写比较好)
 3.npm i express，supervisor  下载依赖 第一个静态资源服务器主要工具 第二个为脚本工具自动重启服务类似热更新
-4.在根目录创建一个server.js文件 写入代码
-const express = require('express')  //引进express
+4.创建一个的json的配置文件文件，如最简单的
+{
+    "PORT": 80//表示端口号
+}
+5.在根目录创建一个server.js文件 写入代码
+const express = require("express")  //引进express
+const { PORT } = require("./config.json")  //引进配置文件
 const app = express()   //创建服务器
-app.use(express.static('./dist'))  //创建静态资源服务器 './dist'为静态资源地址
-app.listen(8015, (req, res) => {  //监听端口号
-    console.log(`${8015} 服务端口启动成功`)
+app.use(express.static("./dist"))  //创建静态资源服务器
+app.listen(PORT, (req, res) => {  //监听端口号
+    console.log(`localhost:${PORT} 服务端口启动成功`)
+    let os=require("os") //获取本地以太网所有信息
+    let localIP =os.networkInterfaces()['以太网'][1]['address']//本地IP地址
+    console.log(`${localIP}:${PORT} 服务端口启动成功`)
 })
+
 5.在根目录下运行代码 supervisor server 或 node server  一个为脚本运行，一个为普通运行，普通运行不会自动重启
 
 
