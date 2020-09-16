@@ -3,6 +3,7 @@
 1.修改vue的指定端口号，在跟目录下创建一个vue.config.js
 代码如下
     module.exports = {
+      productionSourceMap: false, //不显示源码
       devServer: {
         port: 3000, // 端口
       },
