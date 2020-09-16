@@ -205,3 +205,8 @@ app.listen(PORT,(req, res)=>{ //监听端口号
 
 25.let const 在什么时候应该用什么？
 一般来说看定义的是否为可变变量，变的话用let，不变的const。但是还是要看具体情况而定，一般遵守最小特权原则。
+
+26.判断一个变量是什么类型可以用什么方式来检查？
+1.typeof 只能检查基本类型，复杂类型无法精确检查只会得到Object  例:typeof 变量
+2.isAarry 检查是否是数组 es5方法  例: Array.isArray(变量)
+3.用构造器等到构造函数来判断，当然前提是构造器没有被修改。 例: 变量.construct===Object/Array/function/Function
