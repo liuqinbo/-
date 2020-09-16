@@ -209,4 +209,5 @@ app.listen(PORT,(req, res)=>{ //监听端口号
 26.判断一个变量是什么类型可以用什么方式来检查？
 1.typeof 只能检查基本类型，复杂类型无法精确检查只会得到Object  例:typeof 变量
 2.isAarry 检查是否是数组 es5方法  例: Array.isArray(变量)
-3.用构造器等到构造函数来判断，当然前提是构造器没有被修改。 例: 变量.construct===Object/Array/function/Function
+3.用构造器等到构造函数来判断，当然前提是构造器没有被修改  例: 变量.construct===Object/Array/function/Function 
+4./toString()方法,与call()方法结合;用来进行数据类型检测 例: Object.prototype.toString.call(变量)  结果为'[object 结果]'
