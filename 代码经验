@@ -212,3 +212,7 @@ app.listen(PORT,(req, res)=>{ //监听端口号
 2.isAarry 检查是否是数组 es5方法  例: Array.isArray(变量)
 3.用构造器等到构造函数来判断，当然前提是构造器没有被修改  例: 变量.construct===Object/Array/function/Function 
 4./toString()方法,与call()方法结合;用来进行数据类型检测 例: Object.prototype.toString.call(变量)  结果为'[object 结果]'
+
+27.CSS——解决hover离开时效果突然消失的问题
+在样式本身加上transition
+如  img{transition：all 1s} img：hover{transform:scale(1.1);transition：all 1s}
