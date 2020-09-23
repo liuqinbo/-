@@ -64,3 +64,9 @@ var newPoint = addPoints({x:3,y:4},{x:5,y:1})
 // 错误 
 var newPoint2 = addPoints({x:1},{x:4,y:3})
  
+ 8.命名空间
+ 命名空间一个最明确的目的就是解决重名问题
+ 
+ 
+ 
+ 
