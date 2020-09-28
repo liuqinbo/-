@@ -66,7 +66,36 @@ var newPoint2 = addPoints({x:1},{x:4,y:3})
  
  8.命名空间
  命名空间一个最明确的目的就是解决重名问题
+ 命名空间定义了标识符的可见范围，一个标识符可在多个名字空间中定义，它在不同名字空间中的含义是互不相干的。
+ TypeScript 中命名空间使用 namespace 来定义，语法格式如下：
+
+namespace SomeNameSpaceName { 
+   export interface ISomeInterfaceName {      }  
+   export class SomeClassName {      }  
+}
+以上定义了一个命名空间 SomeNameSpaceName，如果我们需要在外部可以调用 SomeNameSpaceName 中的类和接口，则需要在类和接口添加 export 关键字。
+
+要在另外一个命名空间调用语法格式为：
+
+SomeNameSpaceName.SomeClassName;
  
+ 如果一个命名空间在一个单独的 TypeScript 文件中，则应使用三斜杠 /// 引用它，语法格式如下：
+
+/// <reference path = "SomeFileName.ts" />
+
+9.TypeScript 模块
+
+TypeScript 模块的设计理念是可以更换的组织代码。
+模块是在其自身的作用域里执行，并不是在全局作用域，这意味着定义在模块里面的变量、函数和类等在模块外部是不可见的，除非明确地使用 export 导出它们。
+
+.ts 就是.js一样的东西
+
+10.TypeScript 声明文件
  
- 
- 
+ 我们引入jq，但是typeScript 不知道引入的第三方jq是什么类型的，所以用 declare字段来帮助判断我们传入的参数类型对不对
+declare let jQuery: (selector: string) => any;  等于规定它可以的什么类型的
+jQuery("#ID");如直接这样用会报错,要加上面一句
+
+声明文件或模块的语法格式如下：
+declare module Module_Name {
+}
