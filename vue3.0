@@ -4,19 +4,32 @@
 全局变量从 Vue.prototype.名字 => createApp(App).config.globalProperties.名字
 插件使用从 Vue.use(插件名) => createApp(App).use(插件名)
 全局组件从 Vue.component('组件名',组件变量) => createApp(App).component('组件名',组件变量)
-挂载app的方式从 
-new Vue({
-  router,
-  render: h => h(App),    =>   createApp(App).use(router).mount('#app')
-}).$mount('#app')
-
+挂载app的方式从 new Vue({router,render: h => h(App)}).$mount('#app')    =>   createApp(App).use(router).mount('#app')
 如果将 const app = createApp(App)  就和之前差别不大了如 app.use(插件名)
 
 2.路由router
 实例引入从 
 import Vue from 'vue'、import VueRouter from 'vue-router'     =>  import { createRouter, createWebHashHistory(hash模式)或createWebHistory(history模式)} from 'vue-router'
-Vue.use(VueRouter)                                            =>  省略不用了
-let router = new VueRouter({ mode: 'hash',  routes:[省略]}）  =>  const router = createRouter({history : createWebHashHistory()或createWebHistory(),routes:[省略] })
-export default router、import 名字 from 页面位置 导出没变,引入vue文件页面没变
+Vue.use(VueRouter)                                            =>  删除不用了
+let router = new VueRouter({ mode: 'hash',  routes:[省略]}）  =>  const router = createRouter({history : createWebHashHistory()或createWebHistory(),routes:[省略-没变] })
+导出、引入vue文件页面没变(export default router、import 名字 from 页面位置 )
 
-3.vuex
+3.vuex 
+import Vue from 'vue'、import Vuex from 'vuex'             =>   import { createStore } from 'vuex'
+Vue.use(Vuex)                                              =>   删除不用了
+let store = new Vuex.Store({省略})                         =>   const store = createStore({省略-没变})
+export default store 没变化
+1、2、3都是构造实例的方式发送了改变，使用方法没有变化
+
+4.生命周期钩子函数
+beforeCreate  =>  setup() (已删除如果需要的话内部的方法写在此里面)
+created       =>  setup() (已删除如果需要的话内部的方法写在此里面)
+beforeMount   =>  onBeforeMount
+mounted       =>  onMouted
+beforeUpdate  =>  onBeforeUpdate
+updated       =>  onUpdated
+beforeDestroy =>  onBeforeUnmount
+destroyed     =>  onUnmouted
+这些生命周期钩子函数只能在 setup() 里使用
+
+
