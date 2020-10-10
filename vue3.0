@@ -1,11 +1,10 @@
 具体用法
 1.mian.js
-实例引入从 import Vue from 'vue' => import { createApp } from 'vue
-全局变量从 Vue.prototype.名字 => createApp(App).config.globalProperties.名字
-插件使用从 Vue.use(插件名) => createApp(App).use(插件名)
-全局组件从 Vue.component('组件名',组件变量) => createApp(App).component('组件名',组件变量)
-挂载app的方式从 new Vue({router,render: h => h(App)}).$mount('#app')    =>   createApp(App).use(router).mount('#app')
-如果将 const app = createApp(App)  就和之前差别不大了如 app.use(插件名)
+实例引入从 import Vue from 'vue' => import { createApp } from 'vue ;  const app = createApp(App)
+全局变量从 Vue.prototype.名字 => app.config.globalProperties.名字 如果用 createApp(App).config.globalProperties.名字 会定义失败(暂时未去深究原因)
+插件使用从 Vue.use(插件名) => app.use(插件名)
+全局组件从 Vue.component('组件名',组件变量) => app.component('组件名',组件变量)
+挂载app的方式从 new Vue({router,render: h => h(App)}).$mount('#app')    =>   app.use(router).mount('#app')
 
 2.路由router
 实例引入从 
@@ -19,7 +18,7 @@ import Vue from 'vue'、import Vuex from 'vuex'             =>   import { create
 Vue.use(Vuex)                                              =>   删除不用了
 let store = new Vuex.Store({省略})                         =>   const store = createStore({省略-没变})
 export default store 没变化
-1、2、3都是构造实例的方式发送了改变，使用方法没有变化
+1、2、3都是构造实例的方式发生了改变，使用方法没有变化
 
 4.生命周期钩子函数
 beforeCreate  =>  setup() (已删除如果需要的话内部的方法写在此里面)
@@ -31,5 +30,10 @@ updated       =>  onUpdated
 beforeDestroy =>  onBeforeUnmount
 destroyed     =>  onUnmouted
 这些生命周期钩子函数只能在 setup() 里使用
+
+5.setup
+需要注意的是setup里的this不是指向vue实例而是undefined应为是在解析前调用的setup，所以出现了一个来代替指向vue实例的变量ctx。
+import { getCurrentInstance  } from "vue"  const {ctx} = getCurrentInstance() 这里的ctx才是跟以前的this一样指向vue实例
+
 
 
