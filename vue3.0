@@ -1,1 +1,22 @@
+具体用法
+1.mian.js
+实例引入从 import Vue from 'vue' => import { createApp } from 'vue
+全局变量从 Vue.prototype.名字 => createApp(App).config.globalProperties.名字
+插件使用从 Vue.use(插件名) => createApp(App).use(插件名)
+全局组件从 Vue.component('组件名',组件变量) => createApp(App).component('组件名',组件变量)
+挂载app的方式从 
+new Vue({
+  router,
+  render: h => h(App),    =>   createApp(App).use(router).mount('#app')
+}).$mount('#app')
 
+如果将 const app = createApp(App)  就和之前差别不大了如 app.use(插件名)
+
+2.路由router
+实例引入从 
+import Vue from 'vue'、import VueRouter from 'vue-router'     =>  import { createRouter, createWebHashHistory(hash模式)或createWebHistory(history模式)} from 'vue-router'
+Vue.use(VueRouter)                                            =>  省略不用了
+let router = new VueRouter({ mode: 'hash',  routes:[省略]}）  =>  const router = createRouter({history : createWebHashHistory()或createWebHistory(),routes:[省略] })
+export default router、import 名字 from 页面位置 导出没变,引入vue文件页面没变
+
+3.vuex
