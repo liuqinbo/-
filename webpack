@@ -1,0 +1,24 @@
+1.npm init -y  //初始化，得到package.json
+2.npm i webpack webpack-cli -D  //安装webpack
+3.创建webpack.config.js
+  const path = require('path');
+  module.exports = {
+    //js的压缩打包
+    //1.生成一个js文件
+    //entry: ['./js/jquery.pause.js','./js/jquery.marquee.js']
+    //2.生成多个js文件
+    entry: {
+      'jquery.pause': './js/jquery.pause.js',
+      'jquery.marquee': './js/jquery.marquee.js'
+    },
+    output: {
+      filename:  '[name].min.js',
+      path: path.resolve(__dirname, 'dist')
+    },
+    //html的压缩打包
+
+    //sass,less,css的压缩打包
+
+    //img的压缩打包
+
+  };
