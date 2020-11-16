@@ -1,0 +1,39 @@
+1.创建文件夹
+2.进入文件夹初始化 npm init 
+3.安装对应依赖
+* gulp         gulp模块
+* gulp-concat  合并文件
+* gulp-htmlmin 压缩html
+* gulp-uglify  压缩js
+* gulp-csso    压缩css
+* gulp-imagemin    压缩图片
+* gulp-clean   清空文件夹
+* gulp-babel，babel-core 和babel-preset-es2015 将es6转换为es5  
+注意：gulp要在当前目录安装和全局安装
+4.创建gulpfile.js文件
+引入对应依赖，编写代码
+如
+var gulp = require('gulp');
+var htmlmin = require('gulp-htmlmin');          // 压缩html
+// 打包html
+gulp.task('html', function(){
+  return gulp.src('./src/*.html')
+      .pipe(
+        htmlmin(
+            { 
+              removeComments: true, //清除HTML注释
+              collapseWhitespace: true, //压缩HTML
+              minfyJS: true,//压缩JS
+              minfyCss: true,//压缩CSS
+            }
+        )
+      )//压缩html
+      .pipe(gulp.dest('./dist'));
+});
+// dev 此为一次性执行series所有的里的压缩方式
+gulp.task(
+  'dev', 
+  gulp.series('html')
+);
+
+注意：gulpfile.js文件名为特殊文件名不可修改
