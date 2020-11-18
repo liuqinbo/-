@@ -1,20 +1,20 @@
-1)reactµÄÒ³ÃæÒıÈë£¬¸úvueµÄÒ»Ñù£¬µ¼³ö export default Home;  È»ºóÔÙÆäÏëÓ¦ÓÃµÄÒ³Ãæµ¼Èëimport Home from './page/Home';
-×¢Òâ°ÑÒ³ÃæÒª·ÅÔÚapp.jsµÄÍ¬Ò»Ä¿Â¼ÏÂ
+1)reactçš„é¡µé¢å¼•å…¥ï¼Œè·Ÿvueçš„ä¸€æ ·ï¼Œå¯¼å‡º export default Home;  ç„¶åå†å…¶æƒ³åº”ç”¨çš„é¡µé¢å¯¼å…¥import Home from './page/Home';
+æ³¨æ„æŠŠé¡µé¢è¦æ”¾åœ¨app.jsçš„åŒä¸€ç›®å½•ä¸‹
 
 
 
-3)ÀûÓÃÂ·ÓÉÌø×ª¡£°²×°ÒÀÀµreact-router£¬react-router-dom
-1.ÒıÈëÊ½Ìø×ª¡£2.±à³ÌÊ½Ìø×ª
+3)åˆ©ç”¨è·¯ç”±è·³è½¬ã€‚å®‰è£…ä¾èµ–react-routerï¼Œreact-router-dom
+1.å¼•å…¥å¼è·³è½¬ã€‚2.ç¼–ç¨‹å¼è·³è½¬
 		
-		Ìø×ªÊ±µÄ´«²Î
-                this.props.history.push({ pathname: path, state: {key:value}})  ÔÚthis.props.location.stateÀïÃæ
-		Ë¢ĞÂ¾ÍÃ»ÁË£¬µ«ÊÇ¿ÉÒÔ´«¶ÔÏóÓë×Ö·û´®
+		è·³è½¬æ—¶çš„ä¼ å‚
+                this.props.history.push({ pathname: path, state: {key:value}})  åœ¨this.props.location.stateé‡Œé¢
+		åˆ·æ–°å°±æ²¡äº†ï¼Œä½†æ˜¯å¯ä»¥ä¼ å¯¹è±¡ä¸å­—ç¬¦ä¸²
 		
-		this.props.history.push({ pathname: path, search: '×Ö·û´®' })   searchµÄÖµ»á¸úÔÚurlºóÃæ£¬Ë¢ĞÂ²»»áÏûÊ§£¬Ö»ÄÜ´«×Ö·û´®ÀàĞÍ¡£
-		ÔÚthis.props.location.search
+		this.props.history.push({ pathname: path, search: 'å­—ç¬¦ä¸²' })   searchçš„å€¼ä¼šè·Ÿåœ¨urlåé¢ï¼Œåˆ·æ–°ä¸ä¼šæ¶ˆå¤±ï¼Œåªèƒ½ä¼ å­—ç¬¦ä¸²ç±»å‹ã€‚
+		åœ¨this.props.location.search
 
 
-	3.1ÒıÈëÊ½Ìø×ªµÄ·½Ê½Óë´«²Î
+	3.1å¼•å…¥å¼è·³è½¬çš„æ–¹å¼ä¸ä¼ å‚
 		import React, { Component } from 'react';
 		import { BrowserRouter, Route, Link } from 'react-router-dom'
 		import Home from './page/Home';
@@ -24,45 +24,45 @@
    		   <BrowserRouter>
        		  	 <Link to="/home" >home</Link><br />
 
-      			  {/*ÒÔÏÂÎªÂ·ÓÉÅäÖÃ*/}
+      			  {/*ä»¥ä¸‹ä¸ºè·¯ç”±é…ç½®*/}
 
       			  <Route path='/home' component={Home} />
       		  </BrowserRouter>
 
   		  );
   		}
-	}
+	       }
 
 
-	3.2±à³ÌÊ½Ìø×ªµÄ·½Ê½Óë´«²Î
+	3.2ç¼–ç¨‹å¼è·³è½¬çš„æ–¹å¼ä¸ä¼ å‚
 		        <div onClick={this.goto} >Home</ div>
 			  goto = () => {
   				  this.props.history.push("/home")
  			 }
-	×¢Òâ´«²ÎµÄ·½Ê½²»ÄÜÖ±½ÓĞ´ÒªÓÃ this.goto.bind(this,²ÎÊı);
+	æ³¨æ„ä¼ å‚çš„æ–¹å¼ä¸èƒ½ç›´æ¥å†™è¦ç”¨ this.goto.bind(this,å‚æ•°);
 	
 	3.3
 	
-	¶¯Ì¬Â·ÓÉ         <Route path='/goods/:id' component={Goods} />£¬×é¼şÓÃÀàº¯Êı¡£´«µİµÄ²ÎÊıÔÚthis.props.match.paramsÀï£¬Ë¢ĞÂ²»ÏûÊ§
-	Ç¶Ì×Â·ÓÉ	 <Route>Ğ´ÔÚÄÄÀï¾ÍÊÇÄÄ¸öµÄ×ÓÂ·ÓÉ£¬×ÔÉíÈç¹ûÔÙÓĞ×ÓÂ·ÓÉ¾ÍÊÇÇ¶Ì×Â·ÓÉÁË
+	åŠ¨æ€è·¯ç”±         <Route path='/goods/:id' component={Goods} />ï¼Œç»„ä»¶ç”¨ç±»å‡½æ•°ã€‚ä¼ é€’çš„å‚æ•°åœ¨this.props.match.paramsé‡Œï¼Œåˆ·æ–°ä¸æ¶ˆå¤±
+	åµŒå¥—è·¯ç”±	 <Route>å†™åœ¨å“ªé‡Œå°±æ˜¯å“ªä¸ªçš„å­è·¯ç”±ï¼Œè‡ªèº«å¦‚æœå†æœ‰å­è·¯ç”±å°±æ˜¯åµŒå¥—è·¯ç”±äº†
 
-4)react-reduxµÄÓÃ·¨
+4)react-reduxçš„ç”¨æ³•
 
-Ê¹ÓÃReact-ReduxÊ±£¬Ê×ÏÈÒª´´½¨Ò»¸öProvider×é¼ş£¬×÷Îª×î¶¥²ãµÄ×é¼ş½«ËùÓĞReact×é¼ş°ü¹üÆğÀ´£¬´Ó¶øÊ¹ËùÓĞµÄReact×é¼ş¶¼±äÎªProviderµÄºó´ú×é¼ş£¬
-ÔÙ½«ÒÑ¾­´´½¨ºÃµÄStore×÷ÎªÊôĞÔ´«µİ¸øProvider×é¼ş¡£Í¨¹ıProvider×é¼ş½¨Á¢ÆğStoreÓëReact×é¼şÖ®¼äµÄÁªÏµ¡£
+ä½¿ç”¨React-Reduxæ—¶ï¼Œé¦–å…ˆè¦åˆ›å»ºä¸€ä¸ªProviderç»„ä»¶ï¼Œä½œä¸ºæœ€é¡¶å±‚çš„ç»„ä»¶å°†æ‰€æœ‰Reactç»„ä»¶åŒ…è£¹èµ·æ¥ï¼Œä»è€Œä½¿æ‰€æœ‰çš„Reactç»„ä»¶éƒ½å˜ä¸ºProviderçš„åä»£ç»„ä»¶ï¼Œ
+å†å°†å·²ç»åˆ›å»ºå¥½çš„Storeä½œä¸ºå±æ€§ä¼ é€’ç»™Providerç»„ä»¶ã€‚é€šè¿‡Providerç»„ä»¶å»ºç«‹èµ·Storeä¸Reactç»„ä»¶ä¹‹é—´çš„è”ç³»ã€‚
 
-ProviderÄÚµÄÈÎºÎÒ»¸ö×é¼ş£¨±ÈÈçÕâÀïµÄApp£©£¬²¢²»ÄÜÖ±½Ó»ñµÃStateÖĞµÄÊı¾İ£¬¶øÇÒÒ²Ö»ÄÜÊÇÓĞÑ¡ÔñµØ·ÃÎÊStateÖĞµÄÄ³Ğ©Êı¾İ£¬ÕâĞèÒª¾­¹ıÒ»¸ö³ÆÎª¡°connect¡±µÄ¹ı³Ì¡£
-ConnectµÄÖ÷Òª×÷ÓÃÊÇ½«StateÖĞµÄÊı¾İ×ª»»Îª×é¼ş¿ÉÓÃµÄÊı¾İ£¬ÒÔ¼°Éú³ÉActionµÄÅÉ·¢º¯Êı¡£ÔÚÔËĞĞ¹ı³ÌÖĞReact-Redux»áµ÷ÓÃconnect¶Ô×é¼ş½øĞĞ°ü¹ü£¬²¢´«µİStateÊı¾İ¡£
+Providerå†…çš„ä»»ä½•ä¸€ä¸ªç»„ä»¶ï¼ˆæ¯”å¦‚è¿™é‡Œçš„Appï¼‰ï¼Œå¹¶ä¸èƒ½ç›´æ¥è·å¾—Stateä¸­çš„æ•°æ®ï¼Œè€Œä¸”ä¹Ÿåªèƒ½æ˜¯æœ‰é€‰æ‹©åœ°è®¿é—®Stateä¸­çš„æŸäº›æ•°æ®ï¼Œè¿™éœ€è¦ç»è¿‡ä¸€ä¸ªç§°ä¸ºâ€œconnectâ€çš„è¿‡ç¨‹ã€‚
+Connectçš„ä¸»è¦ä½œç”¨æ˜¯å°†Stateä¸­çš„æ•°æ®è½¬æ¢ä¸ºç»„ä»¶å¯ç”¨çš„æ•°æ®ï¼Œä»¥åŠç”ŸæˆActionçš„æ´¾å‘å‡½æ•°ã€‚åœ¨è¿è¡Œè¿‡ç¨‹ä¸­React-Reduxä¼šè°ƒç”¨connectå¯¹ç»„ä»¶è¿›è¡ŒåŒ…è£¹ï¼Œå¹¶ä¼ é€’Stateæ•°æ®ã€‚
 
-5)HashRouter£¬BrowserRouter
-hashÂ·ÓÉÊÇÓĞhashÖµÒ²¾ÍÊÇ#/ºóÃæµÄ¶«Î÷À´Ìø×ªµÄ£¬²»ÊÇÕæÕıµÄurl£¬
-browserÊÇÓÉÕæÕıµÄurlÂ·¾¶À´½øĞĞÌø×ªµÄ£¬ËùÒÔÉÏÏßµÄÊ±ºò»á³öÏÖÎÊÌâ£¬Èç¹ûÓÃµÄhashÂ·ÓÉ¾Í²»»áÓĞÎÊÌâ
+5)HashRouterï¼ŒBrowserRouter
+hashè·¯ç”±æ˜¯æœ‰hashå€¼ä¹Ÿå°±æ˜¯#/åé¢çš„ä¸œè¥¿æ¥è·³è½¬çš„ï¼Œä¸æ˜¯çœŸæ­£çš„urlï¼Œ
+browseræ˜¯ç”±çœŸæ­£çš„urlè·¯å¾„æ¥è¿›è¡Œè·³è½¬çš„ï¼Œæ‰€ä»¥ä¸Šçº¿çš„æ—¶å€™ä¼šå‡ºç°é—®é¢˜ï¼Œå¦‚æœç”¨çš„hashè·¯ç”±å°±ä¸ä¼šæœ‰é—®é¢˜
 
-6)×é¼şË¢ĞÂ£¨ÖØĞÂrender£©µÄÌõ¼ş£¬³öÀ´µÚÒ»µÄ¼ÓÔØÍâ¾ÍÊÇÒª  1  props¸Ä±ä£»2  state¸Ä±ä£»3  forceUpdateÇ¿ÖÆË¢ĞÂ
+6)ç»„ä»¶åˆ·æ–°ï¼ˆé‡æ–°renderï¼‰çš„æ¡ä»¶ï¼Œå‡ºæ¥ç¬¬ä¸€çš„åŠ è½½å¤–å°±æ˜¯è¦  1  propsæ”¹å˜ï¼›2  stateæ”¹å˜ï¼›3  forceUpdateå¼ºåˆ¶åˆ·æ–°
 
-7) antd °´Ğè¼ÓÔØ  
-1.°²×°ÒÀÀµ npm i antd -D  »¹ÓĞ npm i   babel-plugin-import -D
-2.ÔÚ¸ùÄ¿Â¼ÏÂÌí¼ÓÒ»¸ö .babelrc ´úÂëÈçÏÂ
+7) antd æŒ‰éœ€åŠ è½½  
+1.å®‰è£…ä¾èµ– npm i antd -D  è¿˜æœ‰ npm i   babel-plugin-import -D
+2.åœ¨æ ¹ç›®å½•ä¸‹æ·»åŠ ä¸€ä¸ª .babelrc ä»£ç å¦‚ä¸‹
 {
     "plugins": [
         [
@@ -74,12 +74,12 @@ browserÊÇÓÉÕæÕıµÄurlÂ·¾¶À´½øĞĞÌø×ªµÄ£¬ËùÒÔÉÏÏßµÄÊ±ºò»á³öÏÖÎÊÌâ£¬Èç¹ûÓÃµÄhashÂ·ÓÉ
         ]
     ]
 }
-3.ÔÚnode_modulesÀïµÄreact-scripts ÎÄ¼ş¼ĞµÄconfigµÄwebpack.config.js ÀïµÄbabelrc½«flase¸ÄÎªtrue
+3.åœ¨node_modulesé‡Œçš„react-scripts æ–‡ä»¶å¤¹çš„configçš„webpack.config.js é‡Œçš„babelrcå°†flaseæ”¹ä¸ºtrue
 
-8) stateÀïµÄÖµ²»ÄÜÖ±½Ó¸ÄÒªÓÃ this.setState({})À´¸Ä
+8) stateé‡Œçš„å€¼ä¸èƒ½ç›´æ¥æ”¹è¦ç”¨ this.setState({})æ¥æ”¹
 
-9) redux Óëreact-reduxµÄÁªºÏÊ¹ÓÃ
-  1.ÓÃredux´´½¨Ò»¸östore¡£
+9) redux ä¸react-reduxçš„è”åˆä½¿ç”¨
+  1.ç”¨reduxåˆ›å»ºä¸€ä¸ªstoreã€‚
 	import { createStore } from 'redux'
 	let defaultState = { goodlist: [] }
 
@@ -98,7 +98,7 @@ browserÊÇÓÉÕæÕıµÄurlÂ·¾¶À´½øĞĞÌø×ªµÄ£¬ËùÒÔÉÏÏßµÄÊ±ºò»á³öÏÖÎÊÌâ£¬Èç¹ûÓÃµÄhashÂ·ÓÉ
 	const store = createStore(reducer)
 
 	export default store;
-  2.ÓÃreact-redux½« storeÓëProvide ÁªºÏÆğÀ´
+  2.ç”¨react-reduxå°† storeä¸Provide è”åˆèµ·æ¥
 	import { Provider } from 'react-redux';
 	import store from './redux'
 	<Provider store={store}>
@@ -106,9 +106,9 @@ browserÊÇÓÉÕæÕıµÄurlÂ·¾¶À´½øĞĞÌø×ªµÄ£¬ËùÒÔÉÏÏßµÄÊ±ºò»á³öÏÖÎÊÌâ£¬Èç¹ûÓÃµÄhashÂ·ÓÉ
             <App />
         </HashRouter>
        </Provider>
-  3.Ê¹ÓÃ£¬Ê¹ÓÃÊ±ÒıÈëreact-reduxµÄconnect  ÓĞÁ½³£ÓÃ²ÎÊı mapStateToProps£¬mapDispatchToProps¡£
+  3.ä½¿ç”¨ï¼Œä½¿ç”¨æ—¶å¼•å…¥react-reduxçš„connect  æœ‰ä¸¤å¸¸ç”¨å‚æ•° mapStateToPropsï¼ŒmapDispatchToPropsã€‚
 
-10) reduxÄ£¿é»¯
+10) reduxæ¨¡å—åŒ–
 	import {combineReducers} from 'redux';
 	import cartReducer from './cart';
 	import commonReducer from './common';
@@ -117,8 +117,8 @@ browserÊÇÓÉÕæÕıµÄurlÂ·¾¶À´½øĞĞÌø×ªµÄ£¬ËùÒÔÉÏÏßµÄÊ±ºò»á³öÏÖÎÊÌâ£¬Èç¹ûÓÃµÄhashÂ·ÓÉ
  	   cart:cartReducer,
     	   common:commonReducer
 	});
-  	Ä£¿écart£¬common¸úÖ®Ç°Ò»ÑùĞ´¡£
-	ÓÃ·¨£¬Ô­±¾state.ÊôĞÔ±ä³É state.cart/common(Ä£¿éÃû).ÊôĞÔ
-11) action Í³Ò»Ğ´ÆğÀ´,ÓÉº¯ÊıÀ´Éú³Éaction,È»ºóµ÷ÓÃº¯Êı¾ÍĞĞÁË
+  	æ¨¡å—cartï¼Œcommonè·Ÿä¹‹å‰ä¸€æ ·å†™ã€‚
+	ç”¨æ³•ï¼ŒåŸæœ¬state.å±æ€§å˜æˆ state.cart/common(æ¨¡å—å).å±æ€§
+11) action ç»Ÿä¸€å†™èµ·æ¥,ç”±å‡½æ•°æ¥ç”Ÿæˆaction,ç„¶åè°ƒç”¨å‡½æ•°å°±è¡Œäº†
 
-12)   componentWillReceiveProps  props¸Ä±äÊ±´¥·¢Õâ¸öÉúÃüÖÜÆÚº¯Êı
+12)   componentWillReceiveProps  propsæ”¹å˜æ—¶è§¦å‘è¿™ä¸ªç”Ÿå‘½å‘¨æœŸå‡½æ•°
