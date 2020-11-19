@@ -1,0 +1,25 @@
+1.base64
+base64 在window操作系统下的用法   用了base64数据大小大了三分之一：通过Base64编码，原来的3个字节编码后将成为4个字节，即字节增加了33.3%
+
+把a.text 解码到b.text
+certutil -decode a.text  b.text
+
+把a.text 编码到 b.text
+certutil -encode a.text  b.text
+
+
+md5 在window操作系统下的用法 
+
+certutil  -hashfile  文本名 MD5
+
+2.h5标签
+
+header
+nav
+banner
+article
+aside
+footer
+
+3.使video的control自动适应video的宽高   style=“object-fit: fill;”
+4.瀑布流布局  用break-inside：avoid；防止插入分页符让内容分开。
