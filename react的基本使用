@@ -1,17 +1,88 @@
 一 路由
  
- 1 路由的配置
-  2 路由的跳转与传参
+  1.路由的配置
+  2.路由的跳转与传参
   进阶--> 路由守卫
 
 二 页面间的数据传递
- 
+  组件名：对于react来说类名就是组件名
   1.父子页面之前的传递
+    案例网址：https://blog.csdn.net/qq_46370075/article/details/107229824
+    (1)父传子
+    父：<子组件名称  属性名称 = {传递的数据} /> 
+    子：this.props.属性名称 
+    (2)子传父
+     父：定义函数、<子组件名称  属性名称 = {函数(参数)} /> 
+     子：this.props.属性名称(参数)
   2.兄弟页面之间的传递
+    (1)通过先传给父，再由父传给其他子组件
   3.深层次的传递
+    redux则是一个纯粹的状态管理系统，任何的框架都可以用
+    react-redux是针对react将redux和react框架结合起来使用的东西
+    (1)redux创建一个store
+       一般用法
+       import { createStore } from 'redux'
+       let defaultState = { goodlist: [] }
+       function reducer(state = defaultState, action) {
+           switch (action.type) {
+                case 'ADD_TO_CART':
+                   return {
+                        ...state,
+                        goodlist: [...state.goodlist, action.payload]
+                   }
+               default:
+                   return state
+            }
+       }
+       const store = createStore(reducer)
+       export default store;
+       
+       模块化
+       import {combineReducers} from 'redux';
+       import cartReducer from './cart';
+       import commonReducer from './common';
 
+       export default combineReducers({
+           cart:cartReducer,
+           common:commonReducer
+       });
+  	    模块cart，common一般用法一样写。
+	      原本state.属性变成 state.cart/common(模块名).属性
+    (2)用react-redux将store与Provide 联合起来
+      import { Provider } from 'react-redux';
+      import store from './redux'
+      <Provider store={store}>
+          <HashRouter>
+             <App />
+          </HashRouter>
+       </Provider>
+    (3)使用方法
+       作用：connect是连接React组件与 Redux store
+       import { connect } from 'react-redux'
+       //下面的return后会在props中
+       const mapStateToProps = (state) => {
+         return {
+           goodlist: state.goodlist 
+         }
+         
+       }
+       const mapDispatchToProps = (dispatch) => {
+          return {
+               change(value) {
+                   let action = {
+                       type: 'ADD_TO_CART',
+                       payload: value
+                   }
+                   //change方法会通过dispatch触发reducer.js里的修改方法
+                   dispatch(action)
+               }
+          }
+        }
+        //mapStateToProps，把state映射到组件props中。mapDispatchToProps把dispatch映射到组件props中
+        export default connect(mapStateToProps,mapDispatchToProps)(组件名)
+     (4)新方法：Dva
 三 网络请求
-
+  
   1.用XMLHttpRequest创建的请求或者jq的ajax请求
   2.axios
   
