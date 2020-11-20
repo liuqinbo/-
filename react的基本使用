@@ -7,14 +7,13 @@
     import {Router,Route,Switch,Redirect} from 'react-router-dom';
     //import { createHashHistory } from "history";
     //const history = createHashHistory();
-
     class RouterConfig extends React.Component{
         render(){
 	    return(
 	         //<Router history={history}>
 		 <Router>
 		    <Switch>
-		        //路由重定向
+		        //路由重定向,exact表示严格匹配
 		        <Route path='/' exact render={()=>(
 			    <Redirect to='/Page1'/>
 		        )}/> 
@@ -31,24 +30,30 @@
         }
     }
     export default RouterConfig;
-    //mian.js
-    import RouterConfig from './router/index.js';
+    //入口文件 index.js
+    import RouterConfig from './router';
     ReactDOM.render(<RouterConfig/>, document.getElementById('root'));
+    
   2.路由的跳转与传参
     (1)引入式跳转与传参 
     import { Link } from 'react-router-dom' 
     <Link to='/路由' >home</Link> //跳转 
-    <Link to='/路由/参数字符串'>home</Link> //跳转传参，动态路由传参                this.props.match.params接收参数,刷新不消失
-    <Link to={ {pathname:`/路由`,state:{key值：val值}} } >home</Link> //跳转传参 this.props.location.state接收参数
+    <Link to={ {pathname:`/路由`} }>home</Link> //跳转 
+    <Link to='/路由/参数字符串'>home</Link> //params跳转传参(动态路由传参) this.props.match.params接收参数,刷新参数不消失,参数在地址栏显示
+    <Link to={ {pathname:`/路由`,query:{key值：val值}} } >home</Link> //query跳转传参 this.props.location.query接收参数,刷新参数消失,参数在地址栏不显示
+    <Link to={ {pathname:`/路由`,state:{key值：val值}} } >home</Link> //state跳转传参 this.props.location.state接收参数,刷新参数不消失,参数在地址栏不显示
     (2)编程式跳转与传参
     this.props.history.push('/路由')//跳转
-    this.props.history.push('/路由/参数字符串')//params传参，动态路由传参          this.props.match.params接收参数,刷新不消失
-    this.props.history.push({pathname:`/路由`,query:{key值：val值}})//query传参 this.props.location.query接收参数
-    this.props.history.push({pathname:`/路由`,state:{key值：val值}})//state传参 this.props.location.state接收参数
+    this.props.history.push({pathname:`/路由`})//跳转
+    this.props.history.push('/路由/参数字符串') //params跳转传参(动态路由传参)  this.props.match.params接收参数,刷新参数不消失,参数在地址栏显示
+    this.props.history.push({pathname:`/路由`,query:{key值：val值}})//query跳转传参 this.props.location.query接收参数,刷新参数消失,参数在地址栏不显示
+    this.props.history.push({pathname:`/路由`,state:{key值：val值}})//state跳转传参 this.props.location.state接收参数,刷新参数不消失,参数在地址栏不显示
+    
   3.进阶--> 路由守卫
-    Route 可以定义 onEnter 和 onLeave 两个 hook ，这些hook会在页面跳转确认时触发一次
-    onLeave hook 会在所有将离开的路由中触发，从最下层的子路由开始直到最外层父路由结束。然后onEnter hook会从最外层的父路由开始直到最下层子路由结束
+    可以用render来实现
+    
 二 页面间的数据传递
+
   组件名：对于react来说类名就是组件名
   1.父子页面之前的传递
     案例网址：https://blog.csdn.net/qq_46370075/article/details/107229824
@@ -58,8 +63,10 @@
     (2)子传父
      父：定义函数、<子组件名称  属性名称 = {函数(参数)} /> 
      子：this.props.属性名称(参数)
+     
   2.兄弟页面之间的传递
     (1)通过先传给父，再由父传给其他子组件
+    
   3.深层次的传递
     redux则是一个纯粹的状态管理系统，任何的框架都可以用
     react-redux是针对react将redux和react框架结合起来使用的东西
@@ -125,10 +132,44 @@
         //mapStateToProps，把state映射到组件props中。mapDispatchToProps把dispatch映射到组件props中
         export default connect(mapStateToProps,mapDispatchToProps)(组件名)
      (4)新方法：Dva
+     
 三 网络请求
   
   1.用XMLHttpRequest创建的请求或者jq的ajax请求
+    实例地址：https://zhuanlan.zhihu.com/p/191391288
   2.axios
+  创建实例
+  import axios from 'axios' 
+  import React from 'react';
+  const instance = axios.create({
+  	method:'post/get',//默认请求方式
+	baseURL:'http://127.0.0.1',//默认请求路径
+	headers:{'key':1},//默认请求头
+	timeout:5000,/默认请求超时时间
+  })
+  //将instance实例和axios放入全局这样在哪个页面都可以使用了
+  React.Component.prototype.$axios = axios
+  React.Component.prototype.$instance = instance
+  页面中的使用
+  import React, { Component } from 'react'
+  async example(){
+      try{
+            let data = await this.instance({
+                url:'/index',
+                data:{
+                      key:1
+                }
+            })
+           //得到data后面就可以写你要的逻辑了
+	   if(data.code==0){
+	       xxx
+	   }
+      }catch(err){
+	  console.log(err)
+      }
+  }
+  因为之前创建实例的时候都定义了默认的东西，所以在用的时候如果没有修改的话直接这样写就行。
+  因为是异步请求所以会用到async 和 await
   
 四 事件(交互功能)
 
