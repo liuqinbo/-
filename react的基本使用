@@ -98,7 +98,7 @@
            common:commonReducer
        });
   	    模块cart，common一般用法一样写。
-	      原本state.属性变成 state.cart/common(模块名).属性
+	    原本state.属性变成 state.cart/common(模块名).属性
     (2)用react-redux将store与Provide 联合起来
       import { Provider } from 'react-redux';
       import store from './redux'
@@ -137,6 +137,7 @@
   
   1.用XMLHttpRequest创建的请求或者jq的ajax请求
     实例地址：https://zhuanlan.zhihu.com/p/191391288
+    
   2.axios
   创建实例
   import axios from 'axios' 
@@ -173,11 +174,71 @@
   
 四 事件(交互功能)
 
-  1.事件的添加与定义
+  1.事件的绑定
+    react中采用on+事件名的方式来绑定一个事件，React里的事件是驼峰如onClick，React的事件并不是原生事件，而是合成事件。
+    例如：<button onClick={this.Example}>
+    
   2.事件的传参
-  
+    要传参首先要绑定this，因为类的方法默认不会绑定this,所以在调用的时候如果忘记绑定，this的值将会是undefined
+    如果函数不绑定this直接传参的话会在加载时被调用不会等到触发对应事件时才调用 
+    如 <button onClick={this.函数名(参数一,参数二)}>例子</button> 如果此为没有绑定this的情况下会在加载代码过程中直接掉用函数
+    
+    绑定this的方法与传参方式
+    (1),(2),(3)的函数为普通函数 函数名(){ console.log('this is ',this) }
+    (1)在构造函数中绑定 此为react官方推荐绑定方式
+       constructor(props) {
+           super(props)
+	   this.函数名=this.函数名.bind(this)//绑定this
+	   this.函数名=this.函数名.bind(this,参数一,参数二)//绑定加传参
+       }
+    (2)使用箭头函数，有一个潜在的性能问题，每次组件渲染时都生成了新的回调函数
+       <button onClick={ ()=>{ this.函数名 } }>例子</button>//绑定this
+       <button onClick={ ()=>{ this.函数名(参数一,参数二) } }>例子</button>//绑定加传参
+    (3)使用bind()，有一个潜在的性能问题，每次组件渲染时都生成了新的回调函数
+       <button onClick={ this.函数名.bind(this) }>例子</button>//绑定this
+       <button onClick={ this.函数名.bind(this,参数一,参数二) }>例子</button>//绑定加传参
+    (4)使用class properties(类属性)进行绑定 
+       函数名 = (参数) => {console.log('this is:', this)} 箭头函数
+       <button onClick={this.函数名}>例子</button>
+       <button onClick={this.函数名(参数)}>例子</button>//传参
+    
 五 属性等基本使用的总结
-  1.数据的绑定
-  2.变量在html中的使用方式
-  3.变量的定义、赋值与改变
-  4.生命周期
+
+  1.变量的定义、赋值与改变
+    函数中的变量与原生的js没有什么区别，但是在state的变量就有所不同了
+    定义、赋值
+    this.state={
+    	name:liu
+    }
+    修改 this.setState({name:LIU}) ,修改时要用setState不要直接改变state，因为直接改变无法触发react的重新渲染(render)还有state可能会异步更新
+    
+  2.变量和函数在html中的使用方式
+    变量在react中都是用{}括起来表示的不管是函数还是变量
+    this.Example为函数，value为变量
+    如：<button onClick={ this.Example } >{value}</button>
+    
+  3.生命周期
+    挂载
+	当组件实例被创建并插入 DOM 中时，其生命周期调用顺序如下：
+	constructor()//构造函数
+	static getDerivedStateFromProps() //会在调用 render 方法之前调用，它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
+	render()//渲染
+	componentDidMount()//挂载后
+    更新
+	当组件的 props 或 state 发生变化时会触发更新。组件更新的生命周期调用顺序如下：
+	static getDerivedStateFromProps() //会在调用 render 方法之前调用，它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
+	shouldComponentUpdate() //判断是否重新渲染页面 ，true往下走 ，false不重新渲染
+	render()//渲染
+	getSnapshotBeforeUpdate()//在最近一次渲染输出（提交到 DOM 节点）之前调用即更新前
+	componentDidUpdate()//更新后
+    卸载
+	当组件从 DOM 中移除时会调用如下方法：
+	componentWillUnmount() //将卸载
+    错误
+        static getDerivedStateFromError(error) //此生命周期会在后代组件抛出错误后被调用。 它将抛出的错误作为参数，并返回一个值以更新 state
+	注意:getDerivedStateFromError() 会在渲染阶段调用，因此不允许出现副作用。 如遇此类情况，请改用 componentDidCatch()。
+	componentDidCatch(error,info)
+        1.error —— 抛出的错误。
+	2.info —— 带有 componentStack key 的对象，其中包含有关组件引发错误的栈信息。
+	componentDidCatch() 会在“提交”阶段被调用，因此允许执行副作用。
+
