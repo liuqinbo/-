@@ -146,7 +146,7 @@
   	method:'post/get',//默认请求方式
 	baseURL:'http://127.0.0.1',//默认请求路径
 	headers:{'key':1},//默认请求头
-	timeout:5000,/默认请求超时时间
+	timeout:5000,//默认请求超时时间
   })
   //将instance实例和axios放入全局这样在哪个页面都可以使用了
   React.Component.prototype.$axios = axios
@@ -157,9 +157,9 @@
       try{
             let data = await this.instance({
                 url:'/index',
-                data:{
+                data/params:{
                       key:1
-                }
+                } //post用data，get用params
             })
            //得到data后面就可以写你要的逻辑了
 	   if(data.code==0){
