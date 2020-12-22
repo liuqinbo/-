@@ -266,4 +266,4 @@ module.exports = {
 }
 
 29.只能输入数字输入其它的会被删除onkeyup="if (!/^\d+$/.test(this.value)) {this.value = this.value.replace(/[^\d]+/g, '')}"
-
+30.页面禁止图片拖拽document.ondragstart=function() {return false;}
