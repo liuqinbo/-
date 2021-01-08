@@ -13,27 +13,115 @@
 4.创建gulpfile.js文件
 引入对应依赖，编写代码
 如
+/**
+* gulp         gulp模块
+* gulp-concat  合并文件
+* gulp-htmlmin 压缩html
+* gulp-uglify  压缩js
+* gulp-csso    压缩css
+* gulp-imagemin    压缩图片
+* gulp-video64     压缩视频
+* gulp-clean   清空文件夹
+* gulp-babel，babel-core 和babel-preset-es2015将es6转换为es5  
+*/
 var gulp = require('gulp');
 var htmlmin = require('gulp-htmlmin');          // 压缩html
+var babel = require('gulp-babel');          // es6转es5
+var concat = require('gulp-concat');        // 合并文件
+var uglify = require('gulp-uglify');        // js 压缩
+var csso = require('gulp-csso');            // css压缩
+var imagemin = require('gulp-imagemin');    // 图片压缩
+var video = require('gulp-video64');    // 图片压缩
+var clean = require('gulp-clean');          // 清空文件夹
+
 // 打包html
 gulp.task('html', function(){
   return gulp.src('./src/*.html')
       .pipe(
-        htmlmin(
-            { 
-              removeComments: true, //清除HTML注释
-              collapseWhitespace: true, //压缩HTML
-              minfyJS: true,//压缩JS
-              minfyCss: true,//压缩CSS
-            }
+        //压缩html
+        htmlmin( 
+          { 
+            removeComments: true, //清除HTML注释
+            collapseWhitespace: true, //压缩HTML
+            minfyJS: true,//压缩JS
+            minfyCss: true,//压缩CSS
+          }
         )
-      )//压缩html
+      )
       .pipe(gulp.dest('./dist'));
 });
-// dev 此为一次性执行series所有的里的压缩方式
+
+// 打包js
+gulp.task('js_libs', function(){
+  return gulp.src('./src/js/*.js')
+      .pipe(babel()) //转换为es5
+      .pipe(uglify())  // 压缩js
+      .pipe(gulp.dest('./dist/js'));
+});
+// 不压缩js
+gulp.task('nojs', function(){
+  return gulp.src('./src/js/*.js')
+      .pipe(gulp.dest('./dist/js'));
+});
+// js合并
+gulp.task('js', function(){
+  return gulp.src('./src/js/*.js')
+      // .pipe(concat('main.min.js'))    // 合并文件并命名
+      .pipe(babel()) //转换为es5
+      .pipe(uglify())  // 压缩js
+      .pipe(gulp.dest('./dist/js'));
+});
+
+// es6 转换为 es5
+gulp.task('es6',  () => {
+  return gulp.src('./dist/js/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('./dist/js'));
+});
+
+// 打包css
+gulp.task('css', function(){
+  return gulp.src('./src/css/*.css')
+      // .pipe(concat('main.min.css')) // 合并文件并命名
+      .pipe(csso())                   // 压缩优化css
+      .pipe(gulp.dest('./dist/css'));
+});
+
+// 打包img，video，audio资源
+gulp.task('img', function () {
+  return gulp.src('./src/img/*.*')
+      .pipe(imagemin({
+          progressive: true,
+      }))
+      .pipe(gulp.dest('./dist/img'));
+});
+gulp.task('video',function(){
+  return gulp.src('./src/img/*.mp4')
+        .pipe(video())
+        .pipe(gulp.dest('./dist/img'));
+})
+// 不压缩
+gulp.task('noimg', function () {
+  return gulp.src('./src/img/*.*')
+      .pipe(gulp.dest('./dist/img'));
+});
+
+
+// 清空dist文件夹
+gulp.task('clean', function(){
+  return gulp.src(['./dist/*'])
+      .pipe(clean());
+});
+
+// dev
 gulp.task(
   'dev', 
-  gulp.series('html')
+  gulp.series("clean",'html','nojs','css','noimg')
+);
+// build
+gulp.task(
+  'build',
+  gulp.series("clean",'html', 'js','css','img','video')
 );
 
 注意：gulpfile.js文件名为特殊文件名不可修改
