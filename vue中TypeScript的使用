@@ -1,4 +1,4 @@
-
+内容:组件的使用,props的使用,$emit的使用,watch的使用,data数据的定义,methods方法的定义,computed方法的定义,生命周期的定义
 <script lang='ts'> //声明为ts
   import {Componet,Vue,Prop,Emit,Watch} from 'vue-property-decorator'
   import 引入的组件名 from 地址
