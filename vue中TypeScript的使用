@@ -1,1 +1,135 @@
 
+<script lang='ts'> //声明为ts
+  import {Componet,Vue,Prop,Emit,Watch} from 'vue-property-decorator'
+  import 引入的组件名 from 地址
+  @Componet({
+    name:自己的组件名, //（1）
+    components:{引入的组件名} //可选
+  }) //注明此类为一个vue组件
+  如果不引入且组件名用（2）可这样写 简写为:@Componet
+  
+  export default class 自己的组件名（2） extend Vue{
+    //props
+    @Prop(Number) readonly propA: number | undefined
+    @Prop({ default: 'default value' }) readonly propB!: string
+    @Prop([String, Boolean]) readonly propC: string | boolean | undefined
+    相当于原本的
+    props: {
+      propA: {
+        type: Number,
+      },
+      propB: {
+        default: 'default value',
+      },
+      propC: {
+        type: [String, Boolean],
+      },
+    }
+    //emit
+    @Emit()
+    addToCount(n: number) {
+        this.count += n
+    }
+    @Emit('reset')
+    resetCount() {
+        this.count = 0
+    }
+    @Emit()
+    returnValue() {
+        return 10
+    }
+    @Emit()
+    onInputChange(e) {
+        return e.target.value
+    }
+    @Emit()
+    promise() {
+        return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(20)
+        }, 0)
+        })
+    }
+    相当于原本的
+    methods: {
+      addToCount(n) {
+        this.count += n
+        this.$emit('add-to-count', n)
+      },
+      resetCount() {
+        this.count = 0
+        this.$emit('reset')
+      },
+      returnValue() {
+        this.$emit('return-value', 10)
+      },
+      onInputChange(e) {
+        this.$emit('on-input-change', e.target.value, e)
+      },
+      promise() {
+        const promise = new Promise(resolve => {
+            setTimeout(() => {
+            resolve(20)
+            }, 0)
+        })
+        promise.then(value => {
+            this.$emit('promise', value)
+        })
+      }
+    }
+    //watch
+    @Watch('child')
+    onChildChanged(val: string, oldVal: string) {}
+
+    @Watch('person', { immediate: true, deep: true })
+    onPersonChanged1(val: Person, oldVal: Person) {}
+
+    @Watch('person')
+    onPersonChanged2(val: Person, oldVal: Person) {}
+    相当于原本的
+    watch: {
+      child: [
+        {
+          handler: 'onChildChanged',
+          immediate: false,
+          deep: false,
+        },
+      ],
+      person: [
+        {
+          handler: 'onPersonChanged1',
+          immediate: true,
+          deep: true,
+        },
+        {
+          handler: 'onPersonChanged2',
+          immediate: false,
+          deep: false,
+        },
+      ],
+    },
+    methods: {
+      onChildChanged(val, oldVal) {},
+      onPersonChanged1(val, oldVal) {},
+      onPersonChanged2(val, oldVal) {},
+    },
+    //data 直接写
+    name:string='liu' //default 默认
+    protected name:string ='liu' //protected，可被继承，只可在自己或继承的类中使用
+    public string ='liu' //public公共的，可以在其他类中访问可继承
+    private string ='liu' //private私有的，只能自己用且无法继承
+    //computed——函数名前加get就是属于computed的
+    get 函数名(){
+    }
+    //methods——生命都不加就是属于methods的
+    函数名(){
+    }
+    //生命周期写法不变
+    berforeCreate(){
+    }
+    created(){
+    }
+  }
+  
+ 自己的组件名 （1）（2）自选一处写即可
+</script>
