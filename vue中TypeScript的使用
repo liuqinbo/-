@@ -1,4 +1,4 @@
-内容:组件的使用,props的使用,$emit的使用,watch的使用,data数据的定义,methods方法的定义,computed方法的定义,生命周期的定义
+一:组件的使用,props的使用,$emit的使用,watch的使用,data数据的定义,methods方法的定义,computed方法的定义,生命周期的定义
 <script lang='ts'> //声明为ts
   import {Componet,Vue,Prop,Emit,Watch} from 'vue-property-decorator'
   import 引入的组件名 from 地址
@@ -121,7 +121,7 @@
     //computed——函数名前加get就是属于computed的
     get 函数名(){
     }
-    //methods——生命都不加就是属于methods的
+    //methods——不加get就是属于methods的
     函数名(){
     }
     //生命周期写法不变
@@ -133,3 +133,42 @@
   
  自己的组件名 （1）（2）自选一处写即可
 </script>
+
+二:全局变量和方法的定义
+(1)插件化
+一步
+vuePrototype.ts文件:
+const protoInstall= {
+  //options为可选参数
+  install:(Vue:any,options:any)=>{
+    Vue.prototype.函数名=function(){}
+    Vue.prototype.属性名= xxx
+  }
+}
+export default protoInstall
+二步
+mian.ts文件:
+import 名字 from '对应路径/vuePrototype'
+Vue.use(名字)
+三步
+声明文件 文件名.d.ts 文件,在src下创建,声明的变量名要与定义的一样
+文件名.d.ts:
+declare module "vue/types/vue" {
+    interface Vue {
+        属性名:string;
+        函数名:Function;
+    }
+}
+(2)mixin混入
+(3)继承
+具体地址:https://www.cnblogs.com/zjjDaily/p/12931624.html
+
+三:路由定义
+路由的使用不变,只不过换成ts后路由守卫里的参数要加上类型
+如:router.beforeEach(to:any,from:any,next:any){
+    next()
+  }
+
+
+
+
