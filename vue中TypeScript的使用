@@ -10,9 +10,9 @@
   
   export default class 自己的组件名（2） extend Vue{
     //props
-    @Prop(Number) readonly propA: number | undefined
+    @Prop({type:Number}) readonly propA: number | undefined
     @Prop({ default: 'default value' }) readonly propB!: string
-    @Prop([String, Boolean]) readonly propC: string | boolean | undefined
+    @Prop({type:[String, Boolean]}) readonly propC: string | boolean | undefined
     相当于原本的
     props: {
       propA: {
