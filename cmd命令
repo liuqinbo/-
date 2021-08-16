@@ -1,8 +1,8 @@
 问：cmd在指定的软件中打开文件？
-答：dir下的软件名称 文件路径  例：VsCode-.lnk  C:\Users\zhiwan\Desktop\规则.txt
+答：dir下的软件名称 文件路径  例：VsCode-.lnk  C:\Users\liu\Desktop\规则.txt
  
 问：cmd下怎么表示用户环境变量？
 答：%变量名%
   
 问：怎么在cmd中快速打文件夹？
-答：explorer  文件路径   例：explorer  D:\ZhiWan\HalfStack\code\client
+答：explorer  文件路径   例：explorer  D:\liu\HalfStack\code\client
