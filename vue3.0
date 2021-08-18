@@ -17,7 +17,7 @@ let router = new VueRouter({base:'/', mode: 'hash',  routes:[省略]}）  =>  co
 3.vuex 
 import Vue from 'vue'、import Vuex from 'vuex'             =>   import { createStore } from 'vuex'
 Vue.use(Vuex)                                              =>   删除不用了
-let store = new Vuex.Store(省略)                         =>   const store = createStore(省略-没变)
+let store = new Vuex.Store(省略)                           =>   const store = createStore(省略-没变)
 export default store                                       =>   export default store   //没变化
 1、2、3都是构造实例的方式发生了改变，使用方法没有变化
 省略部分:{
