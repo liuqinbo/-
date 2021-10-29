@@ -60,7 +60,8 @@ onRenderTriggered
 5.setup
 1) setup里this的指向问题
 需要注意的是setup里的this不是指向vue实例而是undefined应为是在解析前调用的setup，所以出现了一个来代替指向vue实例的变量ctx。
-import { getCurrentInstance  } from "vue"  const {ctx} = getCurrentInstance() 这里的ctx才是跟以前的this一样指向vue实例
+import { getCurrentInstance  } from "vue"  const {ctx,proxy} = getCurrentInstance() 这里的ctx,proxy才是跟以前的this一样指向vue实例
+但是ctx只有在开发环境下有效，正式环境中不能是使用，使用用proxy代替之前的this
 
 2) setup的参数 
 参数1:props  
