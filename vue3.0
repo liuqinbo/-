@@ -11,7 +11,7 @@
 import Vue from 'vue'、import VueRouter from 'vue-router'     =>  import { createRouter, createWebHashHistory(hash模式)或createWebHistory(history模式)} from 'vue-router'
 Vue.use(VueRouter)                                            =>  删除不用了
 let router = new VueRouter({base:'/', mode: 'hash',  routes:[省略]}）  =>  const router = createRouter({history : createWebHashHistory(第一个参数为base)或createWebHistory(第一个参数为base),routes:[省略-没变] })
-重定向从(未完善好) {path:'*',redirect:{path:'/home'}}  => 捕获所有路由 ( * ) 时，现在必须使用带有自定义正则表达式的参数进行定义 {path:/:pathMatch(.*),redirect:{path:'/home'}}
+重定向从(未完善好) {path:'*',redirect:{path:'/home'}}  => 捕获所有路由 ( * ) 时，现在必须使用带有自定义正则表达式的参数进行定义 {path: '/:pathMatch(.*)*',redirect:{path:'/home'}}
 导出、引入vue文件页面没变(export default router、import 名字 from 页面位置 )
 
 3.vuex 
