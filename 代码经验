@@ -269,3 +269,4 @@ module.exports = {
 30.页面禁止图片拖拽document.ondragstart=function() {return false;}
 31.axios的get传参用params:{}，post用data:{}
 32.用js的new date()这个方法如果日期写成用"-"隔开的如："2020-12-11 10:10:00"可能会出现兼容性问题，如果用"/"就不会出现兼容性问题如："2020/12/11 10:10:00"
+33. npm shrinkwrap 会生成一个当前已安装依赖的文件，可以用来锁版本或者排差版本号出错问题。
