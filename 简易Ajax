@@ -1,3 +1,4 @@
+此Ajax少了请求头的动态设置，请求参数传参格式的动态设置，如有需求者可自行添加。
 let $ = {
     get(options) {
         this.ajax("get", options);
@@ -46,6 +47,7 @@ let $ = {
             }
         }
     },
+    //将对象变成key=value&key=value的格式
     obj2QueryString(data) {
         let arr = [];
         for (let key in data) {
