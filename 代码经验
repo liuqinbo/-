@@ -286,4 +286,13 @@ module.exports = {
 执行规则：先执行一次宏任务(第一次进来时就会执行整体的TS)，然后执行所有的微任务，再执行一次宏任务，然后执行所有的微任务，如此反复
 注：XMLHttpRequest是I/O事件，所以是宏任务
 
+36.当图片缩放文字、图像等失真怎么办？
+在图片下加入下面代码可以恢复
+image-rendering: -moz-crisp-edges;
+image-rendering: -o-crisp-edges;
+image-rendering: -webkit-optimize-contrast;
+image-rendering: crisp-edges;
+-ms-interpolation-mode: nearest-neighbor;
+
+
 
