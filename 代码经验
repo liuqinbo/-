@@ -294,5 +294,7 @@ image-rendering: -webkit-optimize-contrast;
 image-rendering: crisp-edges;
 -ms-interpolation-mode: nearest-neighbor;
 
+37. element-plus 的主题修改注意
+要下载sass依赖 命令npm i sass，不仅仅要node-sass、sass-loader依赖，不然自己设置的主题是有可能会不起作用的。
 
 
