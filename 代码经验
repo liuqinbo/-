@@ -297,4 +297,8 @@ image-rendering: crisp-edges;
 37. element-plus 的主题修改注意
 要下载sass依赖 命令npm i sass，不仅仅要node-sass、sass-loader依赖，不然自己设置的主题是有可能会不起作用的。
 
-
+38.Object.assign(target, sources)——对象合并/赋值
+参数：target--->目标对象;source--->源对象，可以多个也用逗号隔开
+返回值：target，即目标对象
+如无重名的属性将两个或多个对象属性合并到一起，不改变原有对象的属性，
+如有重名属性后面的对象会覆盖前面对象属性
