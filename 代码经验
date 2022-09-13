@@ -279,6 +279,7 @@ module.exports = {
 同：  两者都是只有在监听的值变化时才会触发。虽然computed可以多次调用，但是computed是基于响应式依赖进行缓存的，只在相关响应式依赖发生改变才会触发函数重新求值，不然会立即返回之前的计算结果。
 不同：两者的侧重点不同，computed是计算属性，重点在于计算，所以一般如果涉及计算的话就用computed,而且其最后一定要return一个值。
       watch是监听属性，重点在于触发后的函数它是要干点什么，如需要在数据变化时执行异步或开销较大的这些操作时。
+      
 35.同步和异步
 同步执行：从上到下执行
 异步执行：先执行同步再执行异步，异步是先执行一次宏任务再执行完所有的微任务（如此反复直到所有多执行完）      
@@ -289,7 +290,9 @@ module.exports = {
 执行规则：先执行一次宏任务(第一次进来时就会执行整体的TS)，然后执行所有的微任务，再执行一次宏任务，然后执行所有的微任务，如此反复
 注：XMLHttpRequest是I/O事件，所以是宏任务
 
-36.当图片缩放文字、图像等失真怎么办？
+36.多线程是实现异步的一种手段，异步才是正真的目的
+
+37.当图片缩放文字、图像等失真怎么办？
 在图片下加入下面代码可以恢复
 image-rendering: -moz-crisp-edges;
 image-rendering: -o-crisp-edges;
@@ -297,10 +300,10 @@ image-rendering: -webkit-optimize-contrast;
 image-rendering: crisp-edges;
 -ms-interpolation-mode: nearest-neighbor;
 
-37. element-plus 的主题修改注意
+38.element-plus 的主题修改注意
 要下载sass依赖 命令npm i sass，不仅仅要node-sass、sass-loader依赖，不然自己设置的主题是有可能会不起作用的。
 
-38.Object.assign(target, sources)——对象合并/赋值
+39.Object.assign(target, sources)——对象合并/赋值
 参数：target--->目标对象;source--->源对象，可以多个也用逗号隔开
 返回值：target，即目标对象
 如无重名的属性将两个或多个对象属性合并到一起，不改变原有对象的属性，
