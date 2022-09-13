@@ -279,8 +279,11 @@ module.exports = {
 同：  两者都是只有在监听的值变化时才会触发。虽然computed可以多次调用，但是computed是基于响应式依赖进行缓存的，只在相关响应式依赖发生改变才会触发函数重新求值，不然会立即返回之前的计算结果。
 不同：两者的侧重点不同，computed是计算属性，重点在于计算，所以一般如果涉及计算的话就用computed,而且其最后一定要return一个值。
       watch是监听属性，重点在于触发后的函数它是要干点什么，如需要在数据变化时执行异步或开销较大的这些操作时。
-      
-35.异步任务：宏任务和微任务
+35.同步和异步
+同步执行：从上到下执行
+异步执行：先执行同步再执行异步，异步是先执行一次宏任务再执行完所有的微任务（如此反复直到所有多执行完）      
+异步原理：异步就是宿主开辟出来完全受js进程主控制的子进程，且不可操作DOM。
+异步任务：分为宏任务和微任务，
 宏任务：整体的TS、setTimeout、setInterval、I/O、UI交互事件、postMessage、MessageChannel、setImmediate(Node.js 环境)
 微任务：Promise.then、process.nextTick、Object.observe、MutationObserver、process.nextTick(Node.js 环境)
 执行规则：先执行一次宏任务(第一次进来时就会执行整体的TS)，然后执行所有的微任务，再执行一次宏任务，然后执行所有的微任务，如此反复
